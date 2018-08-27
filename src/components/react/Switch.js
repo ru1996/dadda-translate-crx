@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Storage from '@/utils/storage'
-import { TR_SETTING_SHANBAY, TR_SETTING_YOUDAO } from '@/utils/constant'
+import { TR_SETTING_SHANBAY, TR_SETTING_YOUDAO } from '@/utils/constants'
 
 export default class Switch extends Component {
   constructor(props) {

@@ -1,4 +1,4 @@
-import { TR_STORAGE_KEY, DELAY_MINS_IN_EVERY_STAGE } from '@/utils/constant'
+import { TR_STORAGE_KEY, DELAY_MINS_IN_EVERY_STAGE } from '@/utils/constants'
 import { _wrapTRId } from '@/utils'
 import Storage from '@/utils/storage'
 

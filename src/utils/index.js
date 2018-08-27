@@ -1,4 +1,4 @@
-import { POS_MAP, TR_ID_PREFIX, TR_SETTING_BLACK_LIST_KEY } from './constant'
+import { POS_MAP, TR_ID_PREFIX, TR_SETTING_BLACK_LIST_KEY } from './constants'
 import Storage from './storage'
 import URL from 'url-parse'
 
@@ -64,7 +64,7 @@ export const _calcPosition = e => {
     x = clientX - 10
   }
 
-  // 大于百分之六指高度时弹框出现在上面
+  // 大于百分之六十高度时弹框出现在上面
   if (clientY > innerHeight * 0.6) {
     isTop = false
     y = innerHeight - clientY + 30

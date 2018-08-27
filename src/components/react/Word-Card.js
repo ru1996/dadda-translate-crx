@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Vocabulary from '@/utils/vocabulary'
 import Storage from '@/utils/storage'
-import { TR_SETTING_SHANBAY, TR_SETTING_YOUDAO } from '@/utils/constant'
+import { TR_SETTING_SHANBAY, TR_SETTING_YOUDAO } from '@/utils/constants'
 import { toast } from 'react-toastify'
 
 const speak = (word, type) => {

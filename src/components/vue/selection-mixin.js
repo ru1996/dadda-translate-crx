@@ -10,7 +10,7 @@ import {
   TR_SETTING_IS_DIRECTLY_KEY,
   TR_SETTING_SKIP_CHINESE_KEY,
   TR_SETTING_KEYBOARD_CONTROL
-} from '@/utils/constant'
+} from '@/utils/constants'
 
 export default {
   computed: {
@@ -33,15 +33,11 @@ export default {
     },
 
     resultPanelVisible() {
-      const { panelVisible, selection, translateLoaded, hasAltControl, hasAltPressed } = this
+      const { panelVisible, selection, translateLoaded } = this
 
-      let condition = translateLoaded && panelVisible && selection
+      let result = translateLoaded && panelVisible && selection
 
-      if (hasAltControl) {
-        condition = condition && hasAltPressed
-      }
-
-      return condition
+      return result
     }
   },
 
@@ -61,26 +57,28 @@ export default {
 
       translationResult: Object.create(null),
 
-      hasAltControl: false,
-      hasAltPressed: false
+      hasKeyboardDisplayControl: false,
+      hasControlKeyBeenPressed: false
     }
   },
 
   async mounted() {
-    this.hasAltControl = await this.$storage.get(TR_SETTING_KEYBOARD_CONTROL, false)
+    this.hasKeyboardDisplayControl = await this.$storage.get(TR_SETTING_KEYBOARD_CONTROL, false)
 
-    if (this.hasAltControl) {
-      document.addEventListener('keydown', this.onAltKeyDown)
+    if (this.hasKeyboardDisplayControl) {
+      document.addEventListener('keydown', this.onControlKeyDown)
     }
   },
 
   methods: {
-    /**
-     * ! 按键控制开启翻译
+    /*
+     | ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅|
+     | 按键控制开启翻译   |
+     |_________________|
      */
-    onAltKeyDown(e) {
+    onControlKeyDown(e) {
       if (this.selection && e.altKey) {
-        this.hasAltPressed = true
+        this.hasControlKeyBeenPressed = true
         this.panelVisible = true
       }
     },
@@ -89,18 +87,19 @@ export default {
       this.selection = ''
       this.translateLoaded = false
       this.panelVisible = false
-      this.hasAltPressed = false
+      this.hasControlKeyBeenPressed = false
     },
 
     async showPanel(text) {
-      const { $root, $root: { count, translateDirectly, inExtension }, $storage } = this
-      // 如果设置了直接翻译则直接显示结果面板
-      const isDirectly = await $storage.get(TR_SETTING_IS_DIRECTLY_KEY)
+      const { $root: { inExtension }, $storage } = this
+
+      // 如果设置了<划词后直接翻译>则直接显示结果面板，忽略按键控制
+      const isShowWhatever = await $storage.get(TR_SETTING_IS_DIRECTLY_KEY)
 
       if (inExtension) {
         this.panelVisible = true
       } else {
-        this.panelVisible = isDirectly
+        this.panelVisible = isShowWhatever
       }
 
       this.translationResult = null
@@ -110,8 +109,13 @@ export default {
       this.translateText(text)
     },
 
+    /*
+     | ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅ ̅|
+     |   发送翻译请求    |
+     |_________________|
+     */
     async translateText(text) {
-      const { $root, $root: { count, translateDirectly, inExtension }, $storage } = this
+      const { $root, $root: { inExtension } } = this
       chrome.runtime.sendMessage({ name: 'translate', text, inExtension }, res => {
         if (!res.isHasOxford && /^[A-Z][a-zA-Z]*$/.test(text)) {
           return this.translateText(text.toLowerCase())

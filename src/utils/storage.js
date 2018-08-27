@@ -1,4 +1,4 @@
-import { TR_STORAGE_KEY } from '@/utils/constant'
+import { TR_STORAGE_KEY } from '@/utils/constants'
 
 class Storage {
   constructor() {

@@ -1,4 +1,4 @@
-import { TR_ID_PREFIX } from '@/utils/constant'
+import { TR_ID_PREFIX } from '@/utils/constants'
 
 export default (word, message) => {
   const options = {

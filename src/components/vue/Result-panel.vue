@@ -139,7 +139,7 @@ import {
   TR_SETTING_FONT_FAMILY,
   TR_SETTING_SHANBAY,
   TR_SETTING_YOUDAO
-} from '@/utils/constant'
+} from '@/utils/constants'
 import { SOUGOU_SPOKEN_URL, CGDICT_HOST } from '@/api/host'
 
 export default {

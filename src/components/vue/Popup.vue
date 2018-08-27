@@ -31,12 +31,9 @@
 
 <script>
 import {
-  TR_SETTING_HAS_TOAST_KEY,
-  TR_SETTING_IS_DIRECTLY_KEY,
-  TR_SETTING_SKIP_CHINESE_KEY,
   TR_SETTING_BLACK_LIST_KEY,
   TR_SETTING_AUTO_SPEAK
-} from '@/utils/constant'
+} from '@/utils/constants'
 
 import { _parseURL, _inBlackList } from '@/utils'
 
@@ -44,11 +41,6 @@ export default {
   name: 'popup',
 
   async created() {
-    this.translateDirectly = await this.$storage.get(TR_SETTING_IS_DIRECTLY_KEY, false)
-    this.hasToast = await this.$storage.get(TR_SETTING_HAS_TOAST_KEY, true)
-    this.skipChinese = await this.$storage.get(TR_SETTING_SKIP_CHINESE_KEY, false)
-    this.autoSpeak = await this.$storage.get(TR_SETTING_AUTO_SPEAK, false)
-
     chrome.tabs.query({ active: true, windowId: chrome.windows.WINDOW_ID_CURRENT }, async tabs => {
       const currentTab = tabs[0]
       this.currentHost = _parseURL(currentTab.url).host
@@ -73,22 +65,6 @@ export default {
   },
 
   watch: {
-    translateDirectly(val) {
-      this.$storage.set(TR_SETTING_IS_DIRECTLY_KEY, val)
-    },
-
-    hasToast(val) {
-      this.$storage.set(TR_SETTING_HAS_TOAST_KEY, val)
-    },
-
-    skipChinese(val) {
-      this.$storage.set(TR_SETTING_SKIP_CHINESE_KEY, val)
-    },
-
-    autoSpeak(val) {
-      this.$storage.set(TR_SETTING_AUTO_SPEAK, val)
-    },
-
     async disabledInThisSite(val) {
       const blackList = await this.$storage.get(TR_SETTING_BLACK_LIST_KEY, {})
       blackList[this.currentHost] = val

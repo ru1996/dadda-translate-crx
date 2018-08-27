@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vocabulary from '@/utils/vocabulary'
 import Storage from '@/utils/storage'
-import { TR_SETTING_BLACK_LIST_KEY } from '@/utils/constant'
+import { TR_SETTING_BLACK_LIST_KEY } from '@/utils/constants'
 import { _removeTag, _inBlackList } from '@/utils'
 
 import '@/styles/index_translator.scss'

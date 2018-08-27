@@ -24,6 +24,7 @@ export const TR_SETTING_FONT_FAMILY = '__TR_FONT_FAMILY__'
 
 // 同步扇贝单词
 export const TR_SETTING_SHANBAY = '__TR_SHANBAY__'
+
 // 同步扇贝单词
 export const TR_SETTING_YOUDAO = '__TR_YOUDAO__'
 
@@ -63,11 +64,11 @@ export const POS_MAP = {
   'relative pronoun': '关系代词',
   'relative adverb': '关系副词',
   'infinitive marker': '不定式標記',
-  default: '暂无收录'
+  default: '缺省'
 }
 
 /**
- * @summary  吐司提醒时间
+ * @summary 吐司提醒时间间隔
  */
 export const DELAY_MINS_IN_EVERY_STAGE = {
   1: 5,

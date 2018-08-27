@@ -2,8 +2,8 @@ import api from '@/api'
 
 import Vocabulary from '@/utils/vocabulary'
 import Storage from '@/utils/storage'
-import shanbay from '@/utils/shanbay.js'
-import youdao from '@/utils/youdao.js'
+import shanbay from '@/services/shanbay'
+import youdao from '@/services/youdao'
 
 import Toast from '@/chrome/toast'
 import setNewAlarm from '@/chrome/alarm'
@@ -24,7 +24,7 @@ import {
   TR_SETTING_ENGLISH_MEANING,
   TR_SETTING_KEYBOARD_CONTROL,
   TR_SETTING_CLOSE_ALL_TOAST_KEY
-} from '@/utils/constant'
+} from '@/utils/constants'
 
 import HotReload from './hot-reload'
 
